@@ -67,6 +67,17 @@ until the application has a demonstrated problem that justifies each one.
 - Before changing direction, check `PROJECT_CHARTER_AND_ROADMAP.md` and existing
   documentation for prior decisions.
 
+## Session protocol
+
+- At the beginning of each task, read `PROJECT_CHARTER_AND_ROADMAP.md`,
+  especially its **Current Status and Handoff** section, then read only the
+  additional files relevant to the task.
+- For implementation work, explain the approach and acceptance criteria before
+  editing unless the developer explicitly requests direct implementation.
+- Keep the task focused on one feature, bug, concept, or review at a time.
+- Before ending a milestone, update the roadmap handoff section and add any
+  detailed technical decision to `docs/`.
+
 ## Current first milestone
 
 Before scaffolding substantial application code, define the domain note:
