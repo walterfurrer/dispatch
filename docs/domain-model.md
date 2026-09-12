@@ -13,7 +13,7 @@ Lifecycle: status
 Pickup: name, address, contact phone, instructions
 Drop-off: recipient name, address, contact phone, delivery instructions
 Operational: package description, optional weight, a shipment is related to a driver through an assignment
-Audit: cancellation/failure reason when applicable.
+Audit: cancellation, pickup-failure, or return reason when applicable.
 
 ## 3. MVP driver fields
 Identity: id, first name, last name, phone, email
@@ -22,14 +22,18 @@ Audit: creation/update timestamps
 
 ## 4. Shipment states and allowed transitions
 
-Terminal states: CANCELLED, DELIVERY_FAILED, RETURNED, and DELIVERED
+Terminal states: CANCELLED, PICKUP_FAILED, RETURNED, and DELIVERED
 
 CREATED -> ASSIGNED or CANCELLED
 ASSIGNED -> EN_ROUTE_TO_PICKUP or CANCELLED
-EN_ROUTE_TO_PICKUP -> PICKED_UP or DELIVERY_FAILED
+EN_ROUTE_TO_PICKUP -> PICKED_UP, CANCELLED, or PICKUP_FAILED
 PICKED_UP -> IN_TRANSIT or RETURNED
-IN_TRANSIT -> DELIVERED, DELIVERY_FAILED, or RETURNED
+IN_TRANSIT -> DELIVERED or RETURNED
 Terminal states have no outbound transitions.
+
+PICKUP_FAILED means the driver could not collect the parcel, so it never
+entered courier custody. RETURNED means a previously picked-up parcel was
+returned to its pickup location rather than delivered.
 
 Creating an assignment must atomically create the assignment, change the shipment to ASSIGNED, and change the driver to ON_DELIVERY.
 

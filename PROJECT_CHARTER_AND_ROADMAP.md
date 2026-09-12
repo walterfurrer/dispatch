@@ -70,9 +70,7 @@ CREATED → ASSIGNED → EN_ROUTE_TO_PICKUP → PICKED_UP → IN_TRANSIT → DEL
 Alternative terminal states:
 
 ```text
-CANCELLED
-DELIVERY_FAILED
-RETURNED
+CANCELLED, PICKUP_FAILED, RETURNED
 ```
 
 Each transition must have explicit rules: which prior states allow it, who can
@@ -130,7 +128,8 @@ Done when:
 Goals:
 
 - Implement driver assignment and the shipment state machine.
-- Decide and document cancellation, reassignment, and failed-delivery rules.
+- Decide and document cancellation, reassignment, pickup-failure, and return
+  rules.
 - Add optimistic concurrency or another explicit protection against conflicting
   state transitions when the problem is encountered.
 - Add simple API authentication and role-based authorization for operations
@@ -281,11 +280,12 @@ and implementation history.
 - Codex/VS Code workflow established.
 - Repository-level `AGENTS.md` created with the project’s learning and
   engineering expectations.
+- Git repository initialized.
+- Domain note completed, including the shipment lifecycle and exception paths.
 
 **Next action:**
 
-- Initialize Git in the project directory.
-- Write the one-page domain note covering users, shipment fields, driver
-  fields, allowed transitions, first API resources, and MVP non-goals.
+- Plan the Go service and Docker Compose scaffold, including the initial
+  repository layout, health endpoint, and modular-monolith ADR.
 
-**Last updated:** 2026-09-09
+**Last updated:** 2026-09-12
